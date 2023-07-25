@@ -33,14 +33,21 @@ public class Principal {
 				System.out.println("Digite o valor do produto: R$ ");
 				double valor = prec.nextDouble();
 				
-				Produto produto = new Produto(descricao, valor);
+				if (valor < (limite - totalCompras)) {
 				
-				produtos.add(produto);
+					Produto produto = new Produto(descricao, valor);
+					
+					produtos.add(produto);
+					
+					totalCompras += valor;
+					System.out.println("Total: RS " + totalCompras);
+					System.out.println("Saldo: R$ " + (limite - totalCompras));
 				
-				totalCompras += valor;
-				System.out.println("Total: RS " + totalCompras);
-				System.out.println("Saldo: R$ " + (limite - totalCompras));
-				
+				} else {
+					System.out.println("Limite excedido!");
+					break;
+				}	
+					
 			} else if (op == 2){
 				break;
 			} else {
@@ -49,8 +56,14 @@ public class Principal {
 			
 		}
 		
+		System.out.println("*************************");
+		System.out.println("COMPRAS REALIZADAS");
+		
 		produtos.sort(Comparator.comparing(Produto::getValor));
 		System.out.println(produtos.toString());
 		
+		
+		
+		System.out.println("*************************");
 	}
 }
